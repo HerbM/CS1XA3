@@ -1,6 +1,5 @@
 #Checks if local repo is up to date with the remote repo
-git remote show origin > tmpCheckDate.txt
-if [grep "up to date" tmpCheckDate.txt]
+if git remote show origin | grep -q "up to date"
 then echo "Up to Date"
 else echo "Not Up to Date" 
 fi
