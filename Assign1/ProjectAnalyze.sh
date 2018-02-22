@@ -10,8 +10,8 @@ git diff > changes.log
 
 #Puts each Line from every file containing #TODO in a todo.log
 rm todo.log
-echo $(grep -ln "#TODO" ) | sort -u  > todo.log
+cat $(grep -r -ln "#TODO" ) | sort -u  > todo.log
 
 
 #finds haskell errors
-find -name "*.hs" | xargs ghc -fno-code > error.log
+find -name "*.hs" |xargs ghc -fno-code > error.log
