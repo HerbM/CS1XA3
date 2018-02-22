@@ -12,15 +12,16 @@ git diff > changes.log
 rm todo.log
 cat $(grep -r -ln "#TODO" ) | sort -u  > todo.log
 
-#findsi haskell error
-check = find -name "*.hs" | wc -l
-if [ "$check" = "0" ]
-then 
-find -name "*.hs" |xargs ghc -fno-code > error.log
+#finds  haskell error
+
+if [ "find -name "*.hs" | wc -l" = "0" ] 
+then find -name "*.hs" |xargs ghc -fno-code > error.log
 else
 echo "There are no Haskell programs"
 echo "" > error.log
 fi
+
+#find -name "*.hs" |xargs ghc -fno-code > error.log
 
 #Asks for git clone
 echo "Would you like me to clone a repo? [Y,n]"
