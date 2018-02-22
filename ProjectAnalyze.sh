@@ -9,5 +9,6 @@ git diff > changes.log
 
 
 #Puts each Line from every file containing #TODO in a todo.log
-cat $(grep -l -r "#TODO" ) > todo.log
+rm todo.log
+echo $(grep -ln "#TODO" ) | sort -u  > todo.log
 
