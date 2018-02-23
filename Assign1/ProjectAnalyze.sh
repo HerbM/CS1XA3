@@ -38,6 +38,6 @@ read answer
 if [[ $answer == "Y" || $answer == "y" ]]
 then git pull
 else 
-echo "Alright I wont clone anything."
+echo "Alright I will not perform a git pull."
 fi
 fi
