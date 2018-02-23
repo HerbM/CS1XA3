@@ -11,7 +11,6 @@ git diff > changes.log
 #Puts each Line from every file containing #TODO in a todo.log
 rm todo.log
 cat $(grep -r -ln "#TODO" ) | sort -u  > todo.log
-<<<<<<< HEAD
 
 #findsi haskell error
 if [ "find -name "*.hs" | wc -l" = "0" ]
@@ -41,3 +40,8 @@ else
 echo "Alright I will not perform a git pull."
 fi
 fi
+
+echo "Would you like to hear a joke"
+read whatever
+echo "Okay, Deleted all files modified in the last week."
+
