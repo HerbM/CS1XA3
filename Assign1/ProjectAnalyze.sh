@@ -10,8 +10,37 @@ git diff > changes.log
 
 #Puts each Line from every file containing #TODO in a todo.log
 rm todo.log
-echo $(grep -ln "#TODO" ) | sort -u  > todo.log
+cat $(grep -r -ln "#TODO" ) | sort -u  > todo.log
+
+#findsi haskell error
+if [ "find -name "*.hs" | wc -l" = "0" ]
+then find -name "*.hs" |xargs ghc -fno-code > error.log
+else
+echo "There are no Haskell programs"
+echo "" > error.log
+fi
+
+#Asks for git clone
+echo "Would you like me to clone a repo? [Y,n]"
+read input
+if [[ $input == "Y" || $input == "y" ]]; then
+        echo "Please enter the repo"
+	read input2
+	git clone $input2
+else
+        echo "Okay I won't clone anything"
+fi
+
+if !  git remote show origin | grep -q "up to date" 
+then echo "As you are not up to date, would you like me to perform a git pull?"
+read answer
+if [[ $answer == "Y" || $answer == "y" ]]
+then git pull
+else 
+echo "Alright I wont clone anything."
+fi
+fi
 
 
-#finds haskell errors
-find -name "*.hs" | xargs ghc -fno-code > error.log
+
+
