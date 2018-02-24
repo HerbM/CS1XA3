@@ -45,6 +45,21 @@ echo "Would you like to know how much space you have used in your account? [Y,n]
 read query
 if [[ $query == "Y" || $query == "y" ]]
 then echo "The amount of the memory you used up is:"
-du -hcs ~ | tail -n1 | sed 's/\<total\>//g' | sed 's/\<M\>//g' 
- 
+du -hcs ~ | tail -n1 | sed 's/\<total\>//g' | sed 's/\<M\>//g'
 fi
+
+echo "would you like me to search for anything?[Y,n]"
+read feedback
+if [[ $feedback == "Y" || $feedback == "y" ]]
+        then echo "Would you like to me to search inside files or filenames? (1 = Inside, 2 = Filename)"
+        read feedback2
+        echo "Where would you like me to search? (1 = Current Directory, 2 = Root Directory, 3 = Specific Directory)"
+                read feedback3
+                if [[ $feedback3 == "3" ]]
+                        then echo "Enter Specific Directory"
+                        read directory
+                        fi
+
+
+fi			 	
+#else echo "Okay there will be no searching"
