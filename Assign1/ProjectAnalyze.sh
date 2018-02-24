@@ -53,6 +53,8 @@ read feedback
 if [[ $feedback == "Y" || $feedback == "y" ]]
         then echo "Would you like to me to search inside files or filenames? (1 = Inside, 2 = Filename)"
         read feedback2
+	echo "What would you like me to search?"
+	read searchiteam
         echo "Where would you like me to search? (1 = Current Directory, 2 = Root Directory, 3 = Specific Directory)"
                 read feedback3
                 if [[ $feedback3 == "3" ]]
@@ -60,6 +62,25 @@ if [[ $feedback == "Y" || $feedback == "y" ]]
                         read directory
                         fi
 
+fi
 
-fi			 	
-#else echo "Okay there will be no searching"
+if [ $feedback == "Y" ] && [ $feedback2 == 1 ]
+then #grep
+ 
+	if [[ feedback3 == 1 ]] #current directory
+	then echo "Here are the files that contain $searchiteam found in the current directory."
+	grep -r -l $searchiteam $pwd
+	fi
+
+	if [[ feedback3 == 2 ]] #Root Directory
+	then echo "Here are the files that contain $searchiteam found in the root directory"
+	grep -r -l $searchiteam ~
+	fi
+	
+	if [[ feedback3 == 3 ]] #requested directory
+	then echo "Here are the files that contain $searchiteam found in the requested directory"
+	grep -r -l $searchiteam $directory
+	fi
+fi
+
+
