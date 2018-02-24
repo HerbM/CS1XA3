@@ -100,4 +100,13 @@ if [ $feedback2 == 2 ]
         find $directory -name $searchiteam
         fi
 		fi
+
+if [ "find -name "*.py" | wc -l" = "0" ]
+	then find -name "*.py" |xargs python -m py_compile >> PythonError.log
+	else
+	echo "There are no Python programs"
+	echo "" >> PythonError.log
+fi
+
+
 :
