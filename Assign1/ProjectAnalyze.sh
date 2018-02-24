@@ -10,14 +10,22 @@ git diff > changes.log
 
 #Puts each Line from every file containing #TODO in a todo.log
 rm todo.log
-cat $(grep -r -ln "#TODO" ) | sort -u  > todo.log
+cat $(grep -r "#TODO" )  > todo.log
 
 #findsi haskell error
 if [ "find -name "*.hs" | wc -l" = "0" ]
 then find -name "*.hs" |xargs ghc -fno-code >> error.log
 else
-echo "There are no Haskell programs"
+echo "There are no Haskell programs in this directory"
 echo "" >> error.log
+fi
+
+#finds python Errors
+if [ "find -name "*.py" | wc -l" = "0" ]
+        then find -name "*.py" |xargs python -m py_compile >> PythonError.log
+        else
+        echo "There are no Python programs in this directory"
+        echo "" >> PythonError.log
 fi
 
 #Asks for git clone
@@ -99,15 +107,6 @@ if [ $feedback2 == 2 ]
         then echo "Here are the files named $searchiteam found in the requested directory"
         find $directory -name $searchiteam
         fi
-fi
-
-
-
-if [ "find -name "*.py" | wc -l" = "0" ]
-	then find -name "*.py" |xargs python -m py_compile >> PythonError.log
-	else
-	echo "There are no Python programs"
-	echo "" >> PythonError.log
 fi
 
 
