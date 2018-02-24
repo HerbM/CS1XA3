@@ -41,10 +41,8 @@ echo "Alright I will not perform a git pull. [Y,n]"
 fi
 fi
 
-
-
 echo "Would you like to know how much space you have used in your account? [Y,n]"
 read query
 if [[ $query == "Y" || $query == "y" ]]
-then ( du -hcs ~ )
+then du -hcs ~ | tail -n1
 fi
