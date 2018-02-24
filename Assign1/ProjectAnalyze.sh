@@ -64,23 +64,58 @@ if [[ $feedback == "Y" || $feedback == "y" ]]
 
 fi
 
-if [ $feedback == "Y" ] && [ $feedback2 == 1 ]
-then #grep
+if [ $feedback2 == 1 ]
+	then #grep
  
-	if [[ feedback3 == 1 ]] #current directory
+	if [ "feedback3" == "1" ] #current directory
 	then echo "Here are the files that contain $searchiteam found in the current directory."
 	grep -r -l $searchiteam $pwd
 	fi
 
-	if [[ feedback3 == 2 ]] #Root Directory
+	if [ "feedback3" == "2" ] #Root Directory
 	then echo "Here are the files that contain $searchiteam found in the root directory"
 	grep -r -l $searchiteam ~
 	fi
 	
-	if [[ feedback3 == 3 ]] #requested directory
+	if [ "feedback3" == "3" ] #requested directory
 	then echo "Here are the files that contain $searchiteam found in the requested directory"
 	grep -r -l $searchiteam $directory
 	fi
 fi
+
+if [ $feedback2 == 2 ]
+	then #find
+	
+	if [ feedback3 == 1 ] #current directory
+        then echo "Here are the files named $searchiteam found in the current directory."
+        find $pwd -name $searchiteam
+        fi
+
+        if [ feedback3 == 2 ] #Root Directory
+        then echo "Here are the files named $searchiteam found in the root directory"
+        find ~ -name $searchiteam
+        fi
+
+        if [ feedback3 == 3 ] #requested directory
+        then echo "Here are the files named $searchiteam found in the requested directory"
+        find $directory -name $searchiteam
+        fi
+fi
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
