@@ -32,16 +32,19 @@ else
 fi
 
 if !  git remote show origin | grep -q "up to date" 
-then echo "As you are not up to date, would you like me to perform a git pull?"
+then echo "As you are not up to date, would you like me to perform a git pull? [Y,n]"
 read answer
 if [[ $answer == "Y" || $answer == "y" ]]
 then git pull
 else 
-echo "Alright I will not perform a git pull."
+echo "Alright I will not perform a git pull. [Y,n]"
 fi
 fi
 
-echo "Would you like to hear a joke"
-read whatever
-echo "Okay, Deleted all files modified in the last week."
 
+
+echo "Would you like to know how much space you have used in your account? [Y,n]"
+read query
+if [[ $query == "Y" || $query == "y" ]]
+then ( du -hcs ~ )
+fi
