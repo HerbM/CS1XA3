@@ -14,10 +14,10 @@ cat $(grep -r -ln "#TODO" ) | sort -u  > todo.log
 
 #findsi haskell error
 if [ "find -name "*.hs" | wc -l" = "0" ]
-then find -name "*.hs" |xargs ghc -fno-code > error.log
+then find -name "*.hs" |xargs ghc -fno-code >> error.log
 else
 echo "There are no Haskell programs"
-echo "" > error.log
+echo "" >> error.log
 fi
 
 #Asks for git clone
@@ -44,5 +44,7 @@ fi
 echo "Would you like to know how much space you have used in your account? [Y,n]"
 read query
 if [[ $query == "Y" || $query == "y" ]]
-then du -hcs ~ | tail -n1
+then echo "The amount of the memory you used up is:"
+du -hcs ~ | tail -n1 | sed 's/\<total\>//g' | sed 's/\<M\>//g' 
+ 
 fi
