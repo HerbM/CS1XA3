@@ -9,7 +9,7 @@ git diff > changes.log
 
 
 #3
-(grep -r  "#TODO" $pwd ) >> todo.log
+(grep -r --exclude="todo.log" --exclude="ProjectAnalyze.sh" --exclude="changes.log"  "#TODO" $pwd ) > todo.log
 
 #4
 if [ "find -name "*.hs" | wc -l" = "0" ]
@@ -75,7 +75,7 @@ if [[ $feedback == "Y" || $feedback == "y" ]]
                         fi
 fi
 
-if [ $feedback2 == 1 ] #'$feedback2' == "1" ]
+if [ "$feedback2" == "1" ] #'$feedback2' == "1" ]
 	then #grep
 	if [ "$feedback3" == "1" ] #current directory
 	then echo "Here are the files that contain $searchiteam found in the current directory."
@@ -93,23 +93,20 @@ if [ $feedback2 == 1 ] #'$feedback2' == "1" ]
 	fi
 fi
 
-if [ $feedback2 == 2 ]
+if [ "$feedback2" == "2" ]
 	then
-	if [ '$feedback3' == "1" ] #current directory
+	if [ "$feedback3" == "1" ] #current directory
         then echo "Here are the files named $searchiteam found in the current directory."
         find $pwd -name $searchiteam
         fi
 
-        if [ '$feedback3' == "2" ] #Root Directory
+        if [ "$feedback3"  == "2" ] #Root Directory
         then echo "Here are the files named $searchiteam found in the root directory"
         find ~ -name $searchiteam
         fi
 
-        if [ '$feedback3' == "3" ] #requested directory
+        if [ "$feedback3" == "3" ] #requested directory
         then echo "Here are the files named $searchiteam found in the requested directory"
         find $directory -name $searchiteam
         fi
 fi
-
-
-
