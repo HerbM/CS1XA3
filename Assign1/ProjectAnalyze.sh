@@ -1,34 +1,34 @@
-#hecks if local repo is up to date with the remote repo
+#1
 if git remote show origin | grep -q "up to date"
 then echo "Up to Date"
 else echo "Not Up to Date" 
 fi
 
-# uncommited changes in a file changes.log. Note, this removes previous content of changes.log 
+#2
 git diff > changes.log
 
 
-#Puts each Line from every file containing #TODO in a todo.log
-rm todo.log
-cat $(grep -r "#TODO" )  > todo.log
+#3
+(grep -r  "#TODO" $pwd ) >> todo.log
 
-#findsi haskell error
+#4
 if [ "find -name "*.hs" | wc -l" = "0" ]
 then find -name "*.hs" |xargs ghc -fno-code >> error.log
 else
-echo "There are no Haskell programs in this directory"
+echo "There are no Haskell programs"
 echo "" >> error.log
 fi
 
-#finds python Errors
+#5
 if [ "find -name "*.py" | wc -l" = "0" ]
         then find -name "*.py" |xargs python -m py_compile >> PythonError.log
         else
-        echo "There are no Python programs in this directory"
+        echo "There are no Python programs"
         echo "" >> PythonError.log
 fi
 
-#Asks for git clone
+
+#6
 echo "Would you like me to clone a repo? [Y,n]"
 read input
 if [[ $input == "Y" || $input == "y" ]]; then
@@ -39,6 +39,7 @@ else
         echo "Okay I won't clone anything"
 fi
 
+#7
 if !  git remote show origin | grep -q "up to date" 
 then echo "As you are not up to date, would you like me to perform a git pull? [Y,n]"
 read answer
@@ -49,6 +50,7 @@ echo "Alright I will not perform a git pull. [Y,n]"
 fi
 fi
 
+#8
 echo "Would you like to know how much space you have used in your account? [Y,n]"
 read query
 if [[ $query == "Y" || $query == "y" ]]
@@ -57,7 +59,7 @@ du -hcs ~ | tail -n1 | sed 's/\<total\>//g' | sed 's/\<M\>//g'
 fi
 
 
- 
+#9 
 echo "would you like me to search for anything?[Y,n]"
 read feedback
 if [[ $feedback == "Y" || $feedback == "y" ]]
@@ -110,4 +112,4 @@ if [ $feedback2 == 2 ]
 fi
 
 
-:
+
