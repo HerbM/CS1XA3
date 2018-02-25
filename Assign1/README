@@ -1,1 +1,19 @@
-This is the first assignment
+1. checks if local repo is up to date with the remote repo. Made an if then statement because it looks cleaner than just outputting git remote show origin
+
+2. Puts uncommited changes in a file changes.log. Note, this removes previous content of changes.log
+
+3. Puts each Line from every file containing #TODO in a todo.log
+
+4. Finds the errors in the haskell files present. I made an if then statement in case there were no haskell files, which would normally give an error.
+
+5. Finds the errors in python files. I just used the haskell feature, but changed "ghc -fno-code" to "python -m py_compile"
+	I found the python compliling function at https://stackoverflow.com/questions/4284313/how-can-i-check-the-syntax-of-python-script-without-executing-it
+
+6. Asks if you would like to clone a repo
+
+7. If you're local repo isnt up to date with the remote repo, it asks if you want to do a git push. If you are up to date it doesnt do anything
+
+8. Shows how much space you have used in your account. "| tail -n1 | sed 's/\<total\>//g' | sed 's/\<M\>//g'" is just formatting to get it how i wanted it.
+	I got the formatting information from http://www.linfo.org/tail.html
+
+9. A tool that makes the process of using grep or find more intuitive. You can search in the current directory, a specified one or from the root
