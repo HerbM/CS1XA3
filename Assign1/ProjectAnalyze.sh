@@ -41,12 +41,12 @@ fi
 
 #7
 if !  git remote show origin | grep -q "up to date" 
-then echo "As you are not up to date, would you like me to perform a git pull? [Y,n]"
+then echo "As you are not up to date, would you like me to perform a git push? [Y,n]"
 read answer
 if [[ $answer == "Y" || $answer == "y" ]]
-then git pull
+then git push
 else 
-echo "Alright I will not perform a git pull. [Y,n]"
+echo "Alright I will not perform a git push. [Y,n]"
 fi
 fi
 
