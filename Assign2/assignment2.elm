@@ -1,6 +1,6 @@
 module SvgAnimation exposing (..)
 import Html exposing (..)
-import Html.Attributes
+import Html.Attributes exposing (..)
 import Html as Html
 import Platform.Cmd as Cmd
 import Html.Events exposing (..)
@@ -9,7 +9,6 @@ import Svg exposing (..)
 import Svg.Attributes exposing (..)
 import AnimationFrame as Anim
 import Mouse
-import Keyboard
 
 {- Model
    Hold (x,y) coordinatees for a circle
@@ -38,8 +37,8 @@ update msg model =
   case msg of
       Tick time ->
         let
-          posX = round <| 300 + 200 * cos (toFloat(model.counter)*(time/1000))
-          posY = round <| 300 + 200 * sin (toFloat(model.counter)*(time/1000))
+          posX = round <| 800 + 200 * cos (toFloat(model.counter)*(time/1000))
+          posY = round <| 200 + (200 * sin (toFloat(model.counter)*(2*time/1000)))/2
           modelN = { position = {x = posX, y = posY}, counter = model.counter}
         in (modelN,Cmd.none)
 
@@ -48,7 +47,7 @@ update msg model =
 
           let 
             modely = 
-              if abs(coordinatees.x - model.position.x) <= 200 && abs(coordinatees.y - model.position.y) <= 200 then
+              if abs(coordinatees.x - (model.position.x )) <= 100 && abs(coordinatees.y - (model.position.y)) <= 100 then
                 { position = model.position, counter = model.counter + 1}
               else
                 { position = model.position, counter = model.counter}
@@ -69,6 +68,10 @@ subscriptions model =
    Render circle based on current position
    held in model
  -}
+majorSt : Html.Attribute msg
+majorSt = Html.Attributes.style [("color","white"), ("text-align", "center")] 
+
+
 view : Model -> Html.Html Msg
 view model = 
 
@@ -77,16 +80,16 @@ view model =
       posX = toString model.position.x
       posY = toString model.position.y
     in 
-     div []
-        [ h1 [] [ Html.text ("WElCOME TO CATCH THE STAR!!") ]
-        ,h2 [] [Html.text ("Your job is to click on the flying Star as many times as possible.")]
-        ,h2 [] [Html.text ("Everytime you catch it, you will move up a level, which means the star will be faster!")]
-        ,h2 [] [Html.text ("Click on the star to begin")]
-        ,h2 [] [Html.text ("How far can you reach?")]
-        ,h1 [] [Html.text ("Your Current Level is:")]
-        , h1 [] [ Html.text (toString model.counter)]
-        , svg [width "600",height "600"]
-          [circle [cx posX,cy posY, r "50", fill "red"] []]
+     div [ Html.Attributes.attribute "style" "background-color:black;" ]
+        [ 
+        svg [Svg.Attributes.width "2000",Svg.Attributes.height "500"]
+          [circle [cx posX,cy posY, r "50", fill "LightGoldenRodYellow "] []]
+        ,h1 [majorSt] [ Html.text ("REACH FOR THE MOON!!") ]
+        ,h1 [majorSt] [Html.text ("Your Current Level is: " ++ toString model.counter)]
+        ,h2 [majorSt] [Html.text ("Your job is to click on the flying Moon as many times as possible.")]
+        ,h2 [majorSt] [Html.text ("Everytime you catch it, you will move up a level, which means the Moon will be faster!")]
+        ,h2 [majorSt] [Html.text ("Click on the moon to begin")]
+        ,h2 [majorSt] [Html.text ("How far can you reach?")]
         ]
 
       
