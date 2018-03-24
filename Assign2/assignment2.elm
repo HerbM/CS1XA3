@@ -69,7 +69,7 @@ subscriptions model =
    held in model
  -}
 majorSt : Html.Attribute msg
-majorSt = Html.Attributes.style [("color","white"), ("text-align", "center")] 
+majorSt = Html.Attributes.style [("color","white"), ("text-align", "center"), ("background-color", "black")] 
 
 
 view : Model -> Html.Html Msg
@@ -80,16 +80,17 @@ view model =
       posX = toString model.position.x
       posY = toString model.position.y
     in 
-     div [ Html.Attributes.attribute "style" "background-color:black;" ]
+     div [ majorSt ]
         [ 
         svg [Svg.Attributes.width "2000",Svg.Attributes.height "500"]
-          [circle [cx posX,cy posY, r "50", fill "LightGoldenRodYellow "] []]
+          [circle [cx posX,cy posY, r "50", fill ("#" ++ toString model.position.y)] []]
         ,h1 [majorSt] [ Html.text ("REACH FOR THE MOON!!") ]
         ,h1 [majorSt] [Html.text ("Your Current Level is: " ++ toString model.counter)]
         ,h2 [majorSt] [Html.text ("Your job is to click on the flying Moon as many times as possible.")]
         ,h2 [majorSt] [Html.text ("Everytime you catch it, you will move up a level, which means the Moon will be faster!")]
         ,h2 [majorSt] [Html.text ("Click on the moon to begin")]
         ,h2 [majorSt] [Html.text ("How far can you reach?")]
+        ,h3 [majorSt] [Html.text ("(Epilepsy warning at high levels)")]
         ]
 
       
