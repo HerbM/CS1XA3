@@ -34,26 +34,28 @@ update msg model =
     case msg of
         Tick time ->
 
-          if model.posball.x < 70 && model.dx < 0 then --left side bounce
-            ({ model | dx = -model.dx },Cmd.none)
-              else
-                if model.posball.x > 900 && model.dx > 0 then --right side  bounce
-                  ({ model | dx = -model.dx },Cmd.none)
-                    else 
-                      if model.posball.y < 20 && model.dy < 0 && abs(model.topx + 100 - model.posball.x - 25) < 100 then -- top bounce
-                        ({ model | dy = -model.dy },Cmd.none)  
-                          else
-                            if model.posball.y > 800 then --bottom gone
-                                ({ model | tops = model.tops + 1, posball = { x = 500, y = 400}},Cmd.none)
-                                else
-                                  if model.posball.y < -25 then -- top gone
-                                    ({ model | bottoms = model.bottoms + 1, posball = { x = 500, y = 400} },Cmd.none)
-                                    else 
-                                      if (model.posball.y > 690) && (model.posball.y < 720) && model.dy > 0 && abs(model.bottomx + 100 - model.posball.x - 25) < 100 then -- bottom bounce
-                                          ({ model | dy = -model.dy },Cmd.none)  
-                                            else if model.bottoms >= 3 || model.tops >= 3 then 
-                                              ({ model | dy = 0, dx = 0, on = False },Cmd.none)
-                                                  else ({ on = model.on,  posball = { x = round <| (toFloat(model.posball.x) + (time/2)*(toFloat(model.dx))), y = round <| (toFloat(model.posball.y) + (time/2)*(toFloat(model.dy))) }, dy = model.dy, dx = model.dx, tops = model.tops, bottoms = model.bottoms, topx = model.topx, bottomx = model.bottomx },Cmd.none)
+         if model.on == False then (model, Cmd.none)
+          else 
+            if model.posball.x < 70 && model.dx < 0 then --left side bounce
+                ({ model | dx = -model.dx },Cmd.none)
+                  else
+                    if model.posball.x > 900 && model.dx > 0 then --right side  bounce
+                      ({ model | dx = -model.dx },Cmd.none)
+                        else 
+                          if model.posball.y < 20 && model.dy < 0 && abs(model.topx + 100 - model.posball.x - 25) < 100 then -- top bounce
+                            ({ model | dy = -model.dy },Cmd.none)  
+                              else
+                                if model.posball.y > 800 then --bottom gone
+                                  ({ model | tops = model.tops + 1, posball = { x = 500, y = 400}},Cmd.none)
+                                    else
+                                      if model.posball.y < -25 then -- top gone
+                                        ({ model | bottoms = model.bottoms + 1, posball = { x = 500, y = 400} },Cmd.none)
+                                        else 
+                                          if (model.posball.y > 690) && (model.posball.y < 720) && model.dy > 0 && abs(model.bottomx + 100 - model.posball.x - 25) < 100 then -- bottom bounce
+                                            ({ model | dy = -model.dy },Cmd.none)  
+                                              else if model.bottoms >= 3 || model.tops >= 3 then 
+                                                ({ model | dy = 0, dx = 0, on = False },Cmd.none)
+                                                    else ({ on = model.on,  posball = { x = round <| (toFloat(model.posball.x) + (time/2)*(toFloat(model.dx))), y = round <| (toFloat(model.posball.y) + (time/2)*(toFloat(model.dy))) }, dy = model.dy, dx = model.dx, tops = model.tops, bottoms = model.bottoms, topx = model.topx, bottomx = model.bottomx },Cmd.none)
 
         KeyMsg keyCode ->
           case keyCode of
