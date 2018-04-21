@@ -1,10 +1,3 @@
-module ExprParser (parseExprD,parseExprF, parseExprInteger, parseExprInt) where
-
-import           ExprType
-
-import           Text.Parsec
-import           Text.Parsec.String
-
 {-|
  - Module : ExprParser
  - Description : Contains parsing information
@@ -15,6 +8,17 @@ import           Text.Parsec.String
  - Portability : DOS
  -
  - -}
+
+
+
+module ExprParser where
+
+import           ExprType
+
+import           Text.Parsec
+import           Text.Parsec.String
+
+
 
 -- * Parsing Integers, Ints, Floats, and Doubles
 --
