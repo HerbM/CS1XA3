@@ -1,7 +1,20 @@
+{-|
+ - Module : ExprType
+ - Description : Contains the basic Type Class
+ - Copyright : (c) Hariesh Jayanthan @2018 
+ - License : WTFPL
+ - Maintainer : Jayanthh@mcmaster.ca
+ - Stability : experimental
+ - Portability : DOS
+ -
+ - -}
+
+
+
+
 module ExprType where
 
 import           Data.List
-
 
 
 -- | Datatype for regularly used expressions
